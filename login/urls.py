@@ -19,5 +19,5 @@ from django.urls import path
 from login import views
 
 urlpatterns = [
-    path('/all_users', views.get_all_users),
+    path('all_users', views.get_all_users),
 ]

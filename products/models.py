@@ -13,7 +13,7 @@ class Category(models.Model):
     description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(default=timezone.now, editable=False)
     modifiedAt = models.DateTimeField(default=timezone.now)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -25,7 +25,7 @@ class SubCategory(models.Model):
     description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(default=timezone.now, editable=False)
     modifiedAt = models.DateTimeField(default=timezone.now)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -45,7 +45,7 @@ class Product(models.Model):
     countInStock = models.IntegerField(null=False, default=0)
     createdAt = models.DateTimeField(default=timezone.now, editable=False)
     modifiedAt = models.DateTimeField(default=timezone.now)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -57,7 +57,9 @@ class Review(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     rating = models.IntegerField(null=True, blank=True, default=0)
     comment = models.TextField(null=True, blank=True)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
+    createdAt = models.DateTimeField(default=timezone.now, editable=False)
+    modifiedAt = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.rating)
@@ -84,12 +86,14 @@ class Shipping(models.Model):
         return self.is_active
 
 class ShippingAddress(models.Model):
-    address=models.CharField(max_length=200,null=True,blank=True)
-    city=models.CharField(max_length=200,null=True,blank=True)
-    postalCode=models.CharField(max_length=200,null=True,blank=True)
-    country=models.CharField(max_length=200,null=True,blank=True)
-    shippingPrice=models.DecimalField(max_digits=7,decimal_places=2,null=True,blank=True)
-    _id=models.AutoField(primary_key=True,editable=False)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    postalCode = models.CharField(max_length=200, null=True, blank=True)
+    country = models.CharField(max_length=200, null=True, blank=True)
+    shippingPrice = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    id = models.AutoField(primary_key=True, editable=False)
+    createdAt = models.DateTimeField(default=timezone.now, editable=False)
+    modifiedAt = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.address
@@ -117,7 +121,7 @@ class Order(models.Model):
     delivery= models.ForeignKey(Delivery,on_delete=models.SET_NULL, null=True, blank=True)
     deliveredAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return str(self.createdAt)
@@ -130,7 +134,7 @@ class OrderItem(models.Model):
     qty = models.IntegerField(null=True, blank=True, default=0)
     price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
-    _id = models.AutoField(primary_key=True, editable=False)
+    id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return self.name
