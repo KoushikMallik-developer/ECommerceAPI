@@ -18,6 +18,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class SubCategory(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(upload_to="images/subCategories/", null=True, blank=True)
@@ -85,6 +86,7 @@ class Shipping(models.Model):
     def __str__(self):
         return self.is_active
 
+
 class ShippingAddress(models.Model):
     address = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=200, null=True, blank=True)
@@ -97,6 +99,8 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
 class Delivery(models.Model):
     shipping = models.ForeignKey(Shipping, on_delete=models.SET_NULL, null=True)
     shippingAddress = models.ForeignKey(ShippingAddress, on_delete=models.SET_NULL, null=True)
@@ -109,6 +113,7 @@ class Delivery(models.Model):
     def __str__(self):
         return self.tracking_number
 
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
@@ -118,7 +123,7 @@ class Order(models.Model):
     totalPrice = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     isPaid = models.BooleanField(default=False)
     paidAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
-    delivery= models.ForeignKey(Delivery,on_delete=models.SET_NULL, null=True, blank=True)
+    delivery = models.ForeignKey(Delivery, on_delete=models.SET_NULL, null=True, blank=True)
     deliveredAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     id = models.AutoField(primary_key=True, editable=False)
